@@ -1,7 +1,6 @@
 # Prodigy
 
-This repository contains the code for Prodigy: Towards Unsupervised Anomaly Detection in Production HPC Systems. 
-
+This repository contains the code for Prodigy: Towards Unsupervised Anomaly Detection in Production HPC Systems.
 
 ### Get Started
 
@@ -15,15 +14,53 @@ The applications were run on Eclipse, which is situated at Sandia National Labor
 
 #### Generate results
 
+1. Navigate to the `src` directory where `reproducibility_experiments.py` is located.
+
+2. Open the script file `reproducibility_experiments.py` in a text editor.
+
+3. The script contains several parameters that need to be configured before running the experiments. These parameters are defined within the `main` function and should be modified according to your specific requirements. The parameters include:
+
+- `repeat_nums`: A list of integers specifying the repeat numbers for the experiments.
+- `expConfig_nums`: A list of integers specifying the experimental configuration numbers.
+- `data_dir`: The directory path where the dataset is located.
+- `pre_selected_features_filename`: The file path of the previously determined selected features (if available). Set it to `None` if feature extraction needs to be performed.
+- `output_dir`: The directory path where the experiment outputs will be stored.
+- `verbose`: Set it to `True` if you want to see important logging `INFO` messages during the execution of the script. By default, it is set to `False`, which prints all logging messages.
+
+**Note**: Please ensure that the specified directories exist before running the script. If they do not exist, the script will attempt to create them.
+
+4. Once you have configured the parameters in the `main` function, you can run the script using the following command:
+
+```
+python reproducibility_experiments.py
+```
+
+5. The script generates the following outputs:
+
+- Output directories:
+  - The `output_dir` directory (specified in the parameters) will be created if it does not exist.
+  - The `results` directory will be created within the `output_dir` to store the experiment results.
+
+- Experiment results:
+  - For each combination of `repeat_nums` and `expConfig_nums`, the script generates two JSON files:
+    - A classification report for the test results (`expConfig_{expConfig_num}_repeatNum_{repeat_num}_testResults.json`).
+    - Dataset statistics (`expConfig_{expConfig_num}_repeatNum_{repeat_num}_dataStats.json`).
+  
+- Model and metadata:
+  - The trained model and deployment metadata are saved in the `output_dir`.
+  - The trained model is saved as `model.h5`.
+  - The deployment metadata is saved as `deployment_metadata.json`.
+
+**Note**: Ensure that you have write permissions for the specified output directories.
 
 #### Plot results
 
 This script allows you to plot results from experiment data stored in JSON files. It generates a bar plot of the macro average F1-scores based on different experimental configurations and the number of healthy samples in the training data.
 
 
-1. Navigate to the directory where `plot_results.py` is located.
+1. Navigate to the `src` directory where `reproducibility_plots.py` is located.
 
-2. Open the script file `plot_results.py` in a text editor.
+2. Open the script file `reproducibility_plots.py` in a text editor.
 
 3. Modify the following variables according to your needs:
 
