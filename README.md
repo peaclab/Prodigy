@@ -2,11 +2,17 @@
 
 This repository contains the code for Prodigy: Towards Unsupervised Anomaly Detection in Production HPC Systems.
 
-### Get Started
+### Reproducibility Experiments
 
 The goal of this section is to help users get acquianted with the open source framework as soon as possible. We provide a small production dataset, which will help replicate the results for Figure 6.
 
+#### Requirements
+
+
+
 #### Dataset
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8079388.svg)](https://doi.org/10.5281/zenodo.8079388)
 
 We have chosen four applications, namely LAMMPS, sw4, sw4Lite, and ExaMiniMD, to encompass both real and proxy applications. We have executed each application five times on four compute nodes without introducing any anomalies. To showcase our experiment, we have specifically selected the "memleak" anomaly as it is one of the most commonly occurring types. Additionally, we have also executed each application five times with the chosen anomaly. The dataset we have collected consists of a total of 160 samples, with 80 samples labeled as anomalous and 80 samples labeled as healthy. For the details of applications please refer to the paper. A more detailed information regarding synthetic anomalies can be found in [HPAS repository](https://github.com/peaclab/HPAS).
 
