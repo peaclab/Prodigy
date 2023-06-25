@@ -2,13 +2,28 @@
 
 This repository contains the code for Prodigy: Towards Unsupervised Anomaly Detection in Production HPC Systems.
 
-### Reproducibility Experiments
+
+Maintainer: 
+* **Burak Aksar** - *baksar@bu.edu* 
+
+Developers:  
+* **Burak Aksar** - *baksar@bu.edu*  & **Efe Sencan** - *esencan@bu.edu*
+
+
+### Get Started: Reproducibility Experiments
 
 The goal of this section is to help users get acquianted with the open source framework as soon as possible. We provide a small production dataset, which will help replicate the results for Figure 6.
 
 #### Requirements
 
+Please make sure you are using Python 3.6.x. The requirements are tested with Python 3.6.8 and 3.6.9. 
 
+
+```python3 -m venv prodigy_py36_venv```
+
+```source prodigy_py36_venv/bin/activate```
+
+```pip install -r py36_deployment_reqs.txt```
 
 #### Dataset
 
@@ -91,3 +106,66 @@ The script will read the experiment data from the specified `results_dir`, gener
 7. The plot will be displayed on the screen, and if `verbose` is set to `True`, it will print "Saved the plot" after saving the plot. If you are using the 
 
 8. You can open the saved PDF file to view and analyze the plotted results.
+
+
+### Get Started: Using Prodigy with Your Pipeline
+
+During our experiments we use Lightweight Distributed Metric Service [LDMS](https://github.com/ovis-hpc/ldms-containers) to collect telemetry data using the available samplers: "meminfo", "vmstat", and "procstat". The flow of the designed pipeline shown below, and feel free to update according to your needs.
+
+#### Data Format 
+
+If you have your own sampler data collected from another telemetry frameworks, you can convert them to the necessary format shown below.
+
+Train or test data must have the following 3 common columns: **job_id, component_id, and timestamp**. component_id column is also known as node_id. However, since the node_ids are not unique, we also require job_id. In other words, 
+job_id and component_id combination gives us a unique representation which will be matched with labels.
+
+|    |   job_id |   component_id |   timestamp |   MemTotal::meminfo |   Active::meminfo |   processes::procstat |
+|---:|---------:|---------------:|------------:|--------------------:|------------------:|----------------------:|
+|  0 |       66 |              1 |  1678928719 |             2031012 |            496632 |                  3430 |
+|  1 |       66 |              1 |  1678928722 |             2031012 |            496632 |                  3430 |
+|  2 |       66 |              1 |  1678928723 |             2031012 |            496632 |                  3430 |
+|  3 |       66 |              1 |  1678928724 |             2031012 |            496632 |                  3430 |
+|  4 |       66 |              1 |  1678928725 |             2031012 |            496632 |                  3430 |
+
+
+
+Train or test label must have the component_id and job_id columns, and a label colum, which is **binary_anom**.
+
+|    |   component_id |   job_id |   binary_anom |
+|---:|---------------:|---------:|--------------:|
+|  0 |              1 |       66 |             0 |
+|  0 |              2 |       66 |             0 |
+|  0 |              3 |       66 |             0 |
+|  0 |              4 |       66 |             0 |
+
+
+By looking at the above data structures, we can interpret the data as following: job_id 66 run on 4 compute nodes and all compute nodes were healthy.
+
+
+
+#### Predictions 
+
+If you want to use the trained model in your pipeline, you need to use **AnomalyDetector** class. 
+
+The code below will read a sample CSV file from **input_data_path**. You can try with other DataFrames as long as it is the same as the training data format specified above. You can also check **local_predict.py.**
+
+```python
+
+from anomaly_detector import AnomalyDetector
+
+#input_timeseries must have the same format shown above
+model_dir = "ai4hpc_deployment/models/sample_vae_model"
+anomaly_detector = AnomalyDetector(model_dir=model_dir)
+preds = anomaly_detector.prediction_pipeline(input_timeseries)
+
+```
+
+The preds is a dataframe with where each job_id and component_id combination has a binary prediction value. 
+
+
+|    |   job_id |   component_id |   pred |
+|---:|---------:|---------------:|-------:|
+|  0 |        0 |              1 |      0 |
+|  1 |        0 |              2 |      0 |
+|  2 |        0 |              3 |      0 |
+|  3 |        0 |              4 |      0 |
