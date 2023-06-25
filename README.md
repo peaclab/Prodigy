@@ -169,3 +169,10 @@ The preds is a dataframe with where each job_id and component_id combination has
 |  1 |        0 |              2 |      0 |
 |  2 |        0 |              3 |      0 |
 |  3 |        0 |              4 |      0 |
+
+
+
+
+### License
+
+This project is licensed under the BSD 3-Clause License - see the LICENSE file for details
