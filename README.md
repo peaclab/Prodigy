@@ -109,6 +109,21 @@ Your folder should have the following files after the extraction:
 - `output_dir`: The directory path where the experiment outputs will be stored.
 - `verbose`: Set it to `True` if you want to see important logging `INFO` messages during the execution of the script. By default, it is set to `False`, which prints all logging messages.
 
+Example configurations 
+
+```python
+#Repeats all configurations once (15 - 20 compute-minutes on with one Haswell compute node in Chameleon Cloud)
+repeat_nums = [0]
+expConfig_nums = [0, 1, 2, 3, 4, 5]
+
+#Repeats all configurations once (2 compute-hours on with one Haswell compute node in Chameleon Cloud)
+repeat_nums = [0, 1, 2, 3, 4, 5]
+expConfig_nums = [0, 1, 2, 3, 4, 5]
+
+#Disclaimer: For the paper results, we repeat the experiments ten times. If you want to obtain the same results please set `repeat_nums = [0,1,2,3,4,5,6,7,8,9]` in the previous stage, otherwise, it's normal to observe small differences. 
+
+```
+
 **Note**: Please ensure that the specified directories exist before running the script. If they do not exist, the script will attempt to create them.
 
 4. Once you have configured the parameters in the `main` function, you can run the script using the following command:
@@ -141,7 +156,6 @@ python reproducibility_experiments.py
 
 This script allows you to plot results from experiment data stored in JSON files. It generates a bar plot of the macro average F1-scores based on different experimental configurations and the number of healthy samples in the training data.
 
-
 1. Navigate to the `src` directory where `reproducibility_plots.py` is located.
 
 2. Open the script file `reproducibility_plots.py` in a text editor.
@@ -166,7 +180,7 @@ python plot_results.py
 
 The script will read the experiment data from the specified `results_dir`, generate a bar plot, and save it in the specified `plot_output_dir` as `prodigy_increasing_num_samples_results.pdf`.
 
-7. The plot will be displayed on the screen, and if `verbose` is set to `True`, it will print "Saved the plot" after saving the plot. If you are using the 
+7. The plot will be displayed on the screen if your terminal supports it, nevertheless, the plot will be saved as a PDF to the designated output. 
 
 8. You can open the saved PDF file to view and analyze the plotted results.
 
