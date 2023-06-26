@@ -58,10 +58,19 @@ When the instance is created successfully, follow the below guidelines to access
 
 For the sake of organization, please create a folder named `prodigy_artifacts`. Please make sure you are using Python 3.6.x. The requirements are tested with Python 3.6.8 and 3.6.9.
 
+To install venv in Ubuntu 18.04: (Optional)
+
+```sudo apt-get update```
+
+```sudo apt-get install python3-venv```
+
+Setup the virtual environment and install requirements: 
 
 ```python3 -m venv prodigy_py36_venv```
 
 ```source prodigy_py36_venv/bin/activate```
+
+```pip install --upgrade pip```  => The version is 21.3.1
 
 ```pip install -r py36_deployment_reqs.txt```
 
