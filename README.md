@@ -10,13 +10,53 @@ Developers:
 * **Burak Aksar** - *baksar@bu.edu*  & **Efe Sencan** - *esencan@bu.edu*
 
 
-### Get Started: Reproducibility Experiments
+## Dataset
 
-The goal of this section is to help users get acquianted with the open source framework as soon as possible. We provide a small production dataset, which will help replicate the results for Figure 6.
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8079388.svg)](https://doi.org/10.5281/zenodo.8079388)
 
-#### Requirements
+We released the dataset we used in Section 6.2. We have chosen four applications, namely LAMMPS, sw4, sw4Lite, and ExaMiniMD, to encompass both real and proxy applications. We have executed each application five times on four compute nodes without introducing any anomalies. To showcase our experiment, we have specifically selected the "memleak" anomaly as it is one of the most commonly occurring types. Additionally, we have also executed each application five times with the chosen anomaly. The dataset we have collected consists of a total of 160 samples, with 80 samples labeled as anomalous and 80 samples labeled as healthy. For the details of applications please refer to the paper. A more detailed information regarding synthetic anomalies can be found in [HPAS repository](https://github.com/peaclab/HPAS).
 
-Please make sure you are using Python 3.6.x. The requirements are tested with Python 3.6.8 and 3.6.9. 
+The applications were run on Eclipse, which is situated at Sandia National Laboratories. Eclipse comprises 1488 compute nodes, each equipped with 128GB of memory and two sockets. Each socket contains 18 E5-2695 v4 CPU cores with 2-way hyperthreading, providing substantial computational power for scientific and engineering applications.
+
+## Supercomputing Artifact Evaluation
+
+The goal of this section is to help users get acquianted with the open source framework as soon as possible. We provide a small production dataset, which will replicate the results for Figure 6.
+
+### Computing Environment
+
+We suggest using a Ubuntu-based Linux distribution. We provide specific instructions for Ubuntu 18.04 and Python 3.6.x in Chameleon Cloud. If you are using another cluster, or a local computer please start from **Setup & Requirements section**.
+
+#### Chameleon Cloud (15 human-minutes)
+
+If you haven’t use Chameleon Cloud before, please follow this [guide](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html#step-1-log-in-to-chameleon) to get started.
+
+To get access to Chameleon resources, you will need to be associated with a project that is assigned a resource allocation. Rest of the guide assumes you are part of a project and have allocation. 
+
+Unlike traditional cloud computing platforms, you cannot immediately launch an instance whenever you want to. Chameleon uses a reservation system, where users must reserve machines beforehand. 
+
+**Reserving a node**
+
+* Go to CHI@TACC and find Leases from the left menu
+* Enter “prodigy_sc23_ae_lease” as a Lease Name 
+* Leave Start Date and Start Time empty
+* Click Next
+* Select Reserve Hosts; and 1 instance is enough
+* Select compute_haswell_ib as node_type
+* Click Next
+* Click Create
+
+**Launching an instance**
+
+Please choose an image with Ubuntu18.04. Our suggestion is the following: **CC-Ubuntu18.04-20190626**
+
+When the instance is created successfully, follow the below guidelines to access your instance.
+* [Associating an IP address](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html#associating-an-ip-address)
+* [Accessing Your Instance](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html#accessing-your-instance)
+
+
+#### Setup & Requirements (2 human-minutes + 10 compute-minutes) 
+
+For the sake of organization, please create a folder named `prodigy_artifacts`. Please make sure you are using Python 3.6.x. The requirements are tested with Python 3.6.8 and 3.6.9.
 
 
 ```python3 -m venv prodigy_py36_venv```
@@ -25,15 +65,25 @@ Please make sure you are using Python 3.6.x. The requirements are tested with Py
 
 ```pip install -r py36_deployment_reqs.txt```
 
-#### Dataset
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8079388.svg)](https://doi.org/10.5281/zenodo.8079388)
+Execute the following bash command to download the files from Zenodo or you can manually transfer:
 
-We have chosen four applications, namely LAMMPS, sw4, sw4Lite, and ExaMiniMD, to encompass both real and proxy applications. We have executed each application five times on four compute nodes without introducing any anomalies. To showcase our experiment, we have specifically selected the "memleak" anomaly as it is one of the most commonly occurring types. Additionally, we have also executed each application five times with the chosen anomaly. The dataset we have collected consists of a total of 160 samples, with 80 samples labeled as anomalous and 80 samples labeled as healthy. For the details of applications please refer to the paper. A more detailed information regarding synthetic anomalies can be found in [HPAS repository](https://github.com/peaclab/HPAS).
+```zenodo_get 10.5281/zenodo.8079388```
 
-The applications were run on Eclipse, which is situated at Sandia National Laboratories. Eclipse comprises 1488 compute nodes, each equipped with 128GB of memory and two sockets. Each socket contains 18 E5-2695 v4 CPU cores with 2-way hyperthreading, providing substantial computational power for scientific and engineering applications.
 
-#### Generate results
+Extract the contents of the tar file using the following command:
+
+```tar -xf eclipse_small_prod_dataset.tar```
+
+Your folder should have the following files after the extraction: 
+
+* fe_eclipse_tsfresh_raw_CHI_2000.json
+* prod_train_data.hdf
+* prod_test_data.hdf
+* prod_train_label.csv
+* prod_test_label.csv
+
+#### Generate results (2 human-minutes + 1 compute-hours) 
 
 1. Navigate to the `src` directory where `reproducibility_experiments.py` is located.
 
@@ -56,7 +106,9 @@ The applications were run on Eclipse, which is situated at Sandia National Labor
 python reproducibility_experiments.py
 ```
 
-5. The script generates the following outputs:
+5. Go grab a coffee or have lunch
+
+6. The script generates the following outputs:
 
 - Output directories:
   - The `output_dir` directory (specified in the parameters) will be created if it does not exist.
@@ -74,7 +126,7 @@ python reproducibility_experiments.py
 
 **Note**: Ensure that you have write permissions for the specified output directories.
 
-#### Plot results
+#### Plot results (2 human-minutes + 3 compute-minutes)
 
 This script allows you to plot results from experiment data stored in JSON files. It generates a bar plot of the macro average F1-scores based on different experimental configurations and the number of healthy samples in the training data.
 
@@ -108,7 +160,7 @@ The script will read the experiment data from the specified `results_dir`, gener
 8. You can open the saved PDF file to view and analyze the plotted results.
 
 
-### Get Started: Using Prodigy with Your Pipeline
+### Using Prodigy with Your Pipeline
 
 During our experiments we use Lightweight Distributed Metric Service [LDMS](https://github.com/ovis-hpc/ldms-containers) to collect telemetry data using the available samplers: "meminfo", "vmstat", and "procstat". The flow of the designed pipeline shown below, and feel free to update according to your needs.
 
@@ -169,8 +221,6 @@ The preds is a dataframe with where each job_id and component_id combination has
 |  1 |        0 |              2 |      0 |
 |  2 |        0 |              3 |      0 |
 |  3 |        0 |              4 |      0 |
-
-
 
 
 ### License
