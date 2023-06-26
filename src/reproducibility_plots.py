@@ -81,7 +81,6 @@ def main(results_dir, plot_output_dir):
     result_df.groupby(['num_samples']).mean()
 
     fig, ax = plt.subplots(1, 1, figsize=(plot_params['fig_width'], plot_params['fig_height']))
-
     ax = sns.barplot(x="num_samples", y="f1_scores", data=result_df)
 
     ax.set_ylabel("Macro Average F1-score", size=plot_params['y_label_font'])
@@ -99,9 +98,14 @@ def main(results_dir, plot_output_dir):
     
 
 if __name__ == '__main__':
-    
-    results_dir = "/projectnb/peaclab-mon/aksar/deployment_experiments/eclipse/sc_ae_experiments/models/ae_experiments_vae/results"
-    plot_output_dir = "/projectnb/peaclab-mon/aksar/deployment_experiments/eclipse/sc_ae_experiments/models/ae_experiments_vae/results"
+
+    results_dir = "/home/cc/prodigy_ae_output/results" 
+    plot_output_dir = "/home/cc/prodigy_ae_output/plots"
     verbose = True
 
+    if not os.path.exists(plot_output_dir):
+        os.makedirs(plot_output_dir)
+        logging.info("Created outputs directory")
+    else:
+        logging.info("Output directory already exists")
     main(results_dir, plot_output_dir)

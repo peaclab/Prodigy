@@ -259,12 +259,12 @@ def main(repeat_nums, expConfig_nums, data_dir, pre_selected_features_filename, 
 
 if __name__ == '__main__':
     
-    repeat_nums = [0]
-    expConfig_nums = [0]#, 1, 2, 3, 4, 5]
-    data_dir = "/projectnb/peaclab-mon/aksar/deployment_experiments/eclipse/new_dataset_experiments/paper_dataset"
+    repeat_nums = [0,1,2,3,4,5]
+    expConfig_nums = [0, 1, 2, 3, 4, 5]
+    data_dir = "/home/cc/prodigy_artifacts/"
     #If this parameter is set, it will use the previously determined parameters, if it's None, it's going to extract features
-    pre_selected_features_filename = "/projectnb/peaclab-mon/aksar/deployment_experiments/eclipse/synthetic_dataset_experiments/fe_eclipse_tsfresh_raw_CHI_2000.json"    
-    output_dir = "/usr3/graduate/baksar/projectx/testing_sc_ae"
+    pre_selected_features_filename = "/home/cc/prodigy_artifacts/fe_eclipse_tsfresh_raw_CHI_2000.json"    
+    output_dir = "/home/cc/prodigy_ae_output"
     verbose = True  # Set to True to display important logging INFO messages, otherwise it will print all logging messages
     main(repeat_nums, expConfig_nums, data_dir, pre_selected_features_filename, output_dir, verbose)
     
