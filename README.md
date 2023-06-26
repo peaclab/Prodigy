@@ -1,4 +1,4 @@
-#Prodigy
+# Prodigy
 
 This repository contains the code for Prodigy: Towards Unsupervised Anomaly Detection in Production HPC Systems.
 
