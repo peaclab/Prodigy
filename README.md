@@ -85,13 +85,15 @@ Your folder should have the following files after the extraction:
 
 #### Generate results (2 human-minutes + 2 compute-hours) 
 
+
+
 1. Navigate to the `src` directory where `reproducibility_experiments.py` is located.
 
 2. Open the script file `reproducibility_experiments.py` in a text editor.
 
 3. The script contains several parameters that need to be configured before running the experiments. These parameters are defined within the `main` function and should be modified according to your specific requirements. The parameters include:
 
-- `repeat_nums`: A list of integers specifying the repeat numbers for the experiments.
+- `repeat_nums`: A list of integers specifying the repeat numbers for the experiments. **If you want to shorten the duration of the experiment, please do reduce number of repeats**. Default number is 5 repetitions.
 - `expConfig_nums`: A list of integers specifying the experimental configuration numbers.
 - `data_dir`: The directory path where the dataset is located.
 - `pre_selected_features_filename`: The file path of the previously determined selected features (if available). Set it to `None` if feature extraction needs to be performed.
@@ -126,7 +128,7 @@ python reproducibility_experiments.py
 
 **Note**: Ensure that you have write permissions for the specified output directories.
 
-#### Plot results (2 human-minutes + 1 compute-minutes)
+#### Plot results (2 human-minutes + 3 compute-minutes)
 
 This script allows you to plot results from experiment data stored in JSON files. It generates a bar plot of the macro average F1-scores based on different experimental configurations and the number of healthy samples in the training data.
 

@@ -259,7 +259,7 @@ def main(repeat_nums, expConfig_nums, data_dir, pre_selected_features_filename, 
 
 if __name__ == '__main__':
     
-    repeat_nums = [0,1,2,3,4,5]
+    repeat_nums = [0, 1, 2, 3, 4 ]
     expConfig_nums = [0, 1, 2, 3, 4, 5]
     data_dir = "/home/cc/prodigy_artifacts/"
     #If this parameter is set, it will use the previously determined parameters, if it's None, it's going to extract features
