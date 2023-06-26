@@ -1,4 +1,4 @@
-# Prodigy
+#Prodigy
 
 This repository contains the code for Prodigy: Towards Unsupervised Anomaly Detection in Production HPC Systems.
 
@@ -83,7 +83,7 @@ Your folder should have the following files after the extraction:
 * prod_train_label.csv
 * prod_test_label.csv
 
-#### Generate results (2 human-minutes + 1 compute-hours) 
+#### Generate results (2 human-minutes + 2 compute-hours) 
 
 1. Navigate to the `src` directory where `reproducibility_experiments.py` is located.
 
@@ -126,7 +126,7 @@ python reproducibility_experiments.py
 
 **Note**: Ensure that you have write permissions for the specified output directories.
 
-#### Plot results (2 human-minutes + 3 compute-minutes)
+#### Plot results (2 human-minutes + 1 compute-minutes)
 
 This script allows you to plot results from experiment data stored in JSON files. It generates a bar plot of the macro average F1-scores based on different experimental configurations and the number of healthy samples in the training data.
 
