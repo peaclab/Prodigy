@@ -20,7 +20,9 @@ The applications were run on Eclipse, which is situated at Sandia National Labor
 
 ## Supercomputing Artifact Evaluation
 
-The goal of this section is to help users get acquianted with the open source framework as soon as possible. We provide a small production dataset, which will replicate the results for Figure 6. **Please note that the artifact evaluation section does not reproduce the deployment component.**
+This section aims to help users get acquainted with the open-source framework as soon as possible. We provide a small production dataset, which will replicate the results for Figure 6. 
+
+**Disclaimer**: In the scope of this artifact, we do not cover the end-to-end deployment scenario presented in the paper since it is not straightforward to set up a monitoring framework in a cluster to get started. However, we open source the necessary pipeline components (DataGenerator, DataPipeline, and AnomalyDetector) so users can adapt these based on their needs.
 
 ### Computing Environment
 
