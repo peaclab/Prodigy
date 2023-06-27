@@ -20,7 +20,7 @@ The applications were run on Eclipse, which is situated at Sandia National Labor
 
 ## Supercomputing Artifact Evaluation
 
-The goal of this section is to help users get acquianted with the open source framework as soon as possible. We provide a small production dataset, which will replicate the results for Figure 6.
+The goal of this section is to help users get acquianted with the open source framework as soon as possible. We provide a small production dataset, which will replicate the results for Figure 6. **Please note that the artifact evaluation section does not reproduce the deployment component.**
 
 ### Computing Environment
 
@@ -28,11 +28,11 @@ We suggest using a Ubuntu-based Linux distribution. We provide specific instruct
 
 #### Chameleon Cloud (15 human-minutes)
 
-If you haven’t use Chameleon Cloud before, please follow this [guide](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html#step-1-log-in-to-chameleon) to get started.
+If you haven’t used Chameleon Cloud before, please follow this [guide](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html#step-1-log-in-to-chameleon) to get started.
 
-To get access to Chameleon resources, you will need to be associated with a project that is assigned a resource allocation. Rest of the guide assumes you are part of a project and have allocation. 
+To get access to Chameleon resources, you will need to be associated with a project that is assigned a resource allocation. The rest of the guide assumes you are part of a project and have allocation. 
 
-Unlike traditional cloud computing platforms, you cannot immediately launch an instance whenever you want to. Chameleon uses a reservation system, where users must reserve machines beforehand. 
+Unlike traditional cloud computing platforms, you cannot immediately launch an instance whenever you want to. Chameleon uses a reservation system where users must reserve machines beforehand. 
 
 **Reserving a node**
 
@@ -180,21 +180,21 @@ python plot_results.py
 
 The script will read the experiment data from the specified `results_dir`, generate a bar plot, and save it in the specified `plot_output_dir` as `prodigy_increasing_num_samples_results.pdf`.
 
-7. The plot will be displayed on the screen if your terminal supports it, nevertheless, the plot will be saved as a PDF to the designated output. 
+7. The plot will be displayed on the screen if your terminal supports it. Nevertheless, the plot will be saved as a PDF to the designated output. 
 
 8. You can open the saved PDF file to view and analyze the plotted results.
 
 
 ### Using Prodigy with Your Pipeline
 
-During our experiments we use Lightweight Distributed Metric Service [LDMS](https://github.com/ovis-hpc/ldms-containers) to collect telemetry data using the available samplers: "meminfo", "vmstat", and "procstat". The flow of the designed pipeline shown below, and feel free to update according to your needs.
+During our experiments we use Lightweight Distributed Metric Service [LDMS](https://github.com/ovis-hpc/ldms-containers) to collect telemetry data using the available samplers: "meminfo", "vmstat", and "procstat". The flow of the designed pipeline shown below, and feel free to update it according to your needs.
 
 #### Data Format 
 
-If you have your own sampler data collected from another telemetry frameworks, you can convert them to the necessary format shown below.
+If you have your own sampler data collected from other telemetry frameworks, you can convert them to the necessary format shown below.
 
 Train or test data must have the following 3 common columns: **job_id, component_id, and timestamp**. component_id column is also known as node_id. However, since the node_ids are not unique, we also require job_id. In other words, 
-job_id and component_id combination gives us a unique representation which will be matched with labels.
+job_id and component_id combination gives us a unique representation that will be matched with labels.
 
 |    |   job_id |   component_id |   timestamp |   MemTotal::meminfo |   Active::meminfo |   processes::procstat |
 |---:|---------:|---------------:|------------:|--------------------:|------------------:|----------------------:|
@@ -206,7 +206,7 @@ job_id and component_id combination gives us a unique representation which will 
 
 
 
-Train or test label must have the component_id and job_id columns, and a label colum, which is **binary_anom**.
+Train or test labels must have the component_id and job_id columns, and a label column, which is **binary_anom**.
 
 |    |   component_id |   job_id |   binary_anom |
 |---:|---------------:|---------:|--------------:|
@@ -216,7 +216,7 @@ Train or test label must have the component_id and job_id columns, and a label c
 |  0 |              4 |       66 |             0 |
 
 
-By looking at the above data structures, we can interpret the data as following: job_id 66 run on 4 compute nodes and all compute nodes were healthy.
+By looking at the above data structures, we can interpret the data as follows: job_id 66 run on 4 compute nodes and all compute nodes were healthy.
 
 
 
@@ -237,7 +237,7 @@ preds = anomaly_detector.prediction_pipeline(input_timeseries)
 
 ```
 
-The preds is a dataframe with where each job_id and component_id combination has a binary prediction value. 
+The `preds` is a dataframe with where each job_id and component_id combination has a binary prediction value. 
 
 
 |    |   job_id |   component_id |   pred |
