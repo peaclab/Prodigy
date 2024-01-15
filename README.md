@@ -249,6 +249,16 @@ The `preds` is a dataframe with where each job_id and component_id combination h
 |  2 |        0 |              3 |      0 |
 |  3 |        0 |              4 |      0 |
 
+### Authors and Acknowledgement
+
+Please cite [Prodigy: Towards Unsupervised Anomaly Detection in Production HPC Systems](https://dl.acm.org/doi/10.1145/3581784.3607076)
+
+Authors: Burak Aksar (1), Efe Sencan (1), Benjamin Schwaller (2), Omar Aaziz (2), Vitus J. Leung (2), Jim Brandt (2), Brian Kulis (1), Manuel Egele (1), and Ayse K. Coskun (1)
+
+Affiliations: (1) Department of Electrical and Computer Engineering, Boston University (2) Sandia National Laboratories
+
+This work has been partially funded by Sandia National Laboratories. Sandia National Laboratories is a multimission laboratory managed and operated by National Technology and Engineering Solutions of Sandia, LLC., a wholly owned subsidiary of Honeywell International, Inc., for the U.S. Department of Energy’s National Nuclear Security Administration under Contract DENA0003525.
+
 
 ### License
 
