@@ -1,6 +1,8 @@
 # Prodigy
 
-This repository contains the code for Prodigy: Towards Unsupervised Anomaly Detection in Production HPC Systems. 
+This repository contains the code for [Prodigy: Towards Unsupervised Anomaly Detection in Production HPC Systems](https://dl.acm.org/doi/10.1145/3581784.3607076).
+
+Performance variations caused by anomalies in modern High Performance Computing (HPC) systems lead to decreased efficiency, impaired application performance, and increased operational costs. While machine learning (ML)-based frameworks for automated anomaly detection (often based on time series telemetry data) are gaining popularity in the literature, practical deployment challenges are often overlooked. Some ML-based frameworks require extensive customization, while others need a rich set of labeled samples, none of which are feasible for a production HPC system.This paper introduces a variational autoencoder-based anomaly detection framework, Prodigy, that outperforms the state-of-the-art alternatives by achieving a 0.95 F1-score when detecting performance anomalies. The paper also provides a real system implementation of Prodigy that enables easy integration with monitoring frameworks and rapid deployment. We deploy Prodigy on a production HPC system and demonstrate 88\% accuracy in detecting anomalies. Prodigy involves an interface to provide job- and node-level analysis and explanations for anomaly predictions.
 
 
 Maintainer: 
@@ -252,6 +254,26 @@ The `preds` is a dataframe with where each job_id and component_id combination h
 ### Authors
 
 Please cite [Prodigy: Towards Unsupervised Anomaly Detection in Production HPC Systems](https://dl.acm.org/doi/10.1145/3581784.3607076)
+
+Bibtex entry:
+```
+@inproceedings{10.1145/3581784.3607076,
+author = {Aksar, Burak and Sencan, Efe and Schwaller, Benjamin and Aaziz, Omar and Leung, Vitus J. and Brandt, Jim and Kulis, Brian and Egele, Manuel and Coskun, Ayse K.},
+title = {Prodigy: Towards Unsupervised Anomaly Detection in Production HPC Systems},
+year = {2023},
+isbn = {9798400701092},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3581784.3607076},
+doi = {10.1145/3581784.3607076},
+booktitle = {Proceedings of the International Conference for High Performance Computing, Networking, Storage and Analysis},
+articleno = {26},
+numpages = {14},
+keywords = {high performance computing, anomaly detection, machine learning, deployment},
+location = {<conf-loc>, <city>Denver</city>, <state>CO</state>, <country>USA</country>, </conf-loc>},
+series = {SC '23}
+}
+```
 
 Authors: Burak Aksar (1), Efe Sencan (1), Benjamin Schwaller (2), Omar Aaziz (2), Vitus J. Leung (2), Jim Brandt (2), Brian Kulis (1), Manuel Egele (1), and Ayse K. Coskun (1)
 
